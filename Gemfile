@@ -1,10 +1,13 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.6'
+ruby '2.7.2'
 
 # For page caching
 gem 'actionpack-page_caching'
+
+#amazon
+gem 'aws-sdk-s3'
 
 # For pagination
 gem 'kaminari'

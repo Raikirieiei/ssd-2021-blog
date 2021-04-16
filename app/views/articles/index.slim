@@ -20,25 +20,31 @@
     table.table.table-bordered.table-striped.table-hover
       thead.thead-dark
         tr
-          th ID
+          th Cover
           th Status
           th Title
           th Body
           th Categories
           th No. Comments
-          th Created at
+          / th Created at
+          th Images
           th Updated at
           th Action
       tbody
         - @articles.each do |a|
           tr
-            td = a.id
+            td
+              - if a.cover_image.attached?
+                = image_tag a.cover_image, width: '64px'
             td = a.status
             td.font-weight-bold = a.title.first(16)
             td = a.body
             td = a.categories&.map(&:name)&.join(',').presence || 'NA'
             td = a.comments.count
-            td.font-weight-light = "#{time_ago_in_words(a.created_at)} Ago"
+            td 
+              - a.images.each do |image|
+                = image_tag image, width: '32px' 
+            / td.font-weight-light = "#{time_ago_in_words(a.created_at)} Ago"
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} Ago"
             td
               span
